@@ -1,7 +1,10 @@
 package com.spzhu.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mysql.cj.log.Log;
 import com.mysql.cj.log.LogFactory;
+import com.spzhu.entity.ServiceResultEntity;
 import com.spzhu.entity.UserEntity;
 import com.spzhu.mapper.UserMapper;
 import com.spzhu.service.UserService;
@@ -27,7 +30,7 @@ public class UserController {
 
     @PostMapping("/list")
     @ResponseBody
-    public String table1List(@RequestBody UserEntity userEntity) {
+    public ServiceResultEntity table1List(@RequestBody UserEntity userEntity) {
         String responseData = "";
 
         //return "list table1";
@@ -35,7 +38,9 @@ public class UserController {
         SqlSession sqlSession = null;
         sqlSession = MybatisUtil.createSqlSession();
 
+        PageHelper.startPage(1, 10);
         List<UserEntity> userEntityList = sqlSession.getMapper(UserMapper.class).queryAll(userEntity);
+        PageInfo<UserEntity> data = new PageInfo<>(userEntityList);
         if (userEntityList != null && userEntityList.size() > 0) {
             for (UserEntity user : userEntityList) {
                 logger.info(user.toString());
@@ -43,7 +48,8 @@ public class UserController {
             }
         }
 
-        return responseData;
+        //return responseData;
+        return ServiceResultEntity.ofSuccess(data);
     }
 
     @PostMapping("/add")

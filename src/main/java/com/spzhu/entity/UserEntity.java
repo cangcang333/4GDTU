@@ -1,6 +1,6 @@
 package com.spzhu.entity;
 
-public class UserEntity {
+public class UserEntity extends PageEntity{
 
     String id;
 
