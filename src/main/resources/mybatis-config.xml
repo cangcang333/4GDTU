@@ -10,7 +10,8 @@
     </settings>
 
     <plugins>
-        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
     </plugins>
 <!--
     &lt;!&ndash;类型别名&ndash;&gt;

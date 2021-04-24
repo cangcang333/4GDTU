@@ -7,4 +7,4 @@ CREATE TABLE tbl_user_info (
   address varchar(32),
   reserved varchar(64),
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF-8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

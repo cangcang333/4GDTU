@@ -31,25 +31,7 @@ public class UserController {
     @PostMapping("/list")
     @ResponseBody
     public ServiceResultEntity table1List(@RequestBody UserEntity userEntity) {
-        String responseData = "";
-
-        //return "list table1";
-        //return userService.findByName(userEntity).toString();
-        SqlSession sqlSession = null;
-        sqlSession = MybatisUtil.createSqlSession();
-
-        PageHelper.startPage(1, 10);
-        List<UserEntity> userEntityList = sqlSession.getMapper(UserMapper.class).queryAll(userEntity);
-        PageInfo<UserEntity> data = new PageInfo<>(userEntityList);
-        if (userEntityList != null && userEntityList.size() > 0) {
-            for (UserEntity user : userEntityList) {
-                logger.info(user.toString());
-                responseData += user;
-            }
-        }
-
-        //return responseData;
-        return ServiceResultEntity.ofSuccess(data);
+        return userService.listUsers(userEntity);
     }
 
     @PostMapping("/add")
