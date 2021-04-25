@@ -34,7 +34,8 @@
     </environments>
     <mappers>
         <!--mappers是映射器，把mapper文件加入到配置文件中-->
-        <mapper resource="com/spzhu/mapper/UserMapper.xml"></mapper>
+        <!--<mapper resource="com/spzhu/mapper/UserMapper.xml"></mapper>-->
+        <mapper resource="com/spzhu/mapper/LevelMapper.xml"></mapper>
     </mappers>
 </configuration>
 

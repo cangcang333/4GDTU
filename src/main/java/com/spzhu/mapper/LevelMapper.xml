@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spzhu.mapper.LevelMapper">
+
+    <resultMap type="com.spzhu.entity.LevelEntity" id="levelMap" >
+        <result property="pointName" column="point_name" jdbcType="VARCHAR"/>
+        <result property="time" column="time" jdbcType="VARCHAR"/>
+        <result property="settlingValue" column="settling_value" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAll" resultMap="levelMap">
+        select point_name, time, settling_value from settlement_data
+        <where>
+            <if test="time != null and time != ''">
+                and time = #{time}
+            </if>
+            <if test="pointName != null and pointName != ''">
+                and point_name = #{pointName}
+            </if>
+            <if test="settlingValue != null and settlingValue != ''">
+                and settling_value = #{settlingValue}
+            </if>
+        </where>
+    </select>
+
+    <insert id = "insert">
+        insert into settlement_data(point_name,time,settling_value)
+        values(#{pointName}, #{time},#{settlingValue})
+    </insert>
+</mapper>

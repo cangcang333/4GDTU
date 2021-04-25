@@ -13,18 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class UserService {
 
+    @Resource
+    private UserMapper userMapper;
     final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    public static String addUser(UserEntity userEntity) {
-        SqlSession sqlSession = null;
-        sqlSession = MybatisUtil.createSqlSession();
-
-        int count = sqlSession.getMapper(UserMapper.class).insert(userEntity);
+    public String addUser(UserEntity userEntity) {
+        int count = userMapper.insert(userEntity);
         if (count <= 0) {
             return "addUser failed\n";
         }
@@ -33,13 +33,11 @@ public class UserService {
         return "addUser successful\n";
     }
 
-    public static ServiceResultEntity listUsers(UserEntity userEntity) {
+    public ServiceResultEntity listUsers(UserEntity userEntity) {
         String responseData = "";
-        SqlSession sqlSession = null;
-        sqlSession = MybatisUtil.createSqlSession();
 
         PageHelper.startPage(1, 10);
-        List<UserEntity> userEntityList = sqlSession.getMapper(UserMapper.class).queryAll(userEntity);
+        List<UserEntity> userEntityList = userMapper.queryAll(userEntity);
         PageInfo<UserEntity> data = new PageInfo<>(userEntityList);
         if (userEntityList != null && userEntityList.size() > 0) {
             for (UserEntity user : userEntityList) {
@@ -58,7 +56,8 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         userEntity.setId("33");
         userEntity.setName("Pippen");
-        String ret = addUser(userEntity);
+        UserService userService = new UserService();
+        String ret = userService.addUser(userEntity);
         System.out.println(ret);
     }
 }
