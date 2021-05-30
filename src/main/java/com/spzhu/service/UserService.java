@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,11 +54,29 @@ public class UserService {
     }
 
     public static void main(String[] args) {
+        /*
         UserEntity userEntity = new UserEntity();
         userEntity.setId("33");
         userEntity.setName("Pippen");
         UserService userService = new UserService();
         String ret = userService.addUser(userEntity);
         System.out.println(ret);
+
+         */
+
+        System.out.println("test empty list");
+        List<String> aList = new ArrayList<>();
+        //List<String> aList = null;
+        for (String v : aList) {
+            System.out.println(v);
+        }
+
+        // Palindrome test
+        String palindrome = "Dot saw I was Tod";
+        StringBuilder sb = new StringBuilder(palindrome);
+        sb.reverse();
+        System.out.println(sb);
+
+
     }
 }
