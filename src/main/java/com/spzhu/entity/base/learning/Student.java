@@ -9,4 +9,10 @@ public class Student {
         this.id = id;
         this.age = age;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Student stu = (Student) obj;
+        return this.id == stu.id;
+    }
 }
